@@ -1,0 +1,26 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "verpress",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "vuepress dev docs",
+    "build": "vuepress build docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/advence-liz/blog.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/advence-liz/blog/issues"
+  },
+  "homepage": "https://github.com/advence-liz/blog#readme",
+  "dependencies": {
+    "koa": "^2.5.1",
+    "koa-static": "^4.0.3",
+    "vuepress": "^0.10.0"
+  }
+}
