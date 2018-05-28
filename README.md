@@ -1,26 +1,5 @@
----
-sidebar: auto
----
-
 # blog
 
-<!-- markdownlint-disable MD033 -->
-
-verpress
-
-## code
-
-<link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.css" rel="stylesheet">
-
-<button type="button" class="btn btn-outline-primary">Primary</button>
-<button type="button" class="btn btn-outline-secondary">Secondary</button>
-<button type="button" class="btn btn-outline-success">Success</button>
-<button type="button" class="btn btn-outline-danger">Danger</button>
-<button type="button" class="btn btn-outline-warning">Warning</button>
-<button type="button" class="btn btn-outline-info">Info</button>
-<button type="button" class="btn btn-outline-light">Light</button>
-<button type="button" class="btn btn-outline-dark">Dark</button>
-
-## ref
-
-的点点滴滴···v
+# TODO
+[ ] 构建一个简易的生成Demo common 组件,方便之后扩展兴许可以调整到codepen 之类的链接，或者自定义 code minor 实现方式...
+[ ] 通过命令动态执行不同的 deploy 
