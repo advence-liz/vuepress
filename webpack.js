@@ -1,50 +1,3 @@
----
-home: true
-title: 'Module'
-description: JavaScript 模块加载机制
-heroImage: /banner.jpg
-actionText: 发车 →
-actionLink: /commonjs/
-footer: MIT Licensed | Copyright © liz
----
-
-## 历史
-
-JavaScript 随着时间的推移所负责的责任越来越重从最开始的添加表单验证功能之类的脚本到angular 应用开发框架，随着js任务越来越重就急需模块化的解决方案。
-
-模块化的基础条件就是开辟一片独立的上下文，一般编程语言开辟一个上下文的方式有语法上可以通过 class  function  block ，物理上通过文件划分，逻辑划分 package namespace，
-多数语言要么通过 物理路径划分模块，要么根据逻辑路径抽象划分，而模块输出结果基本可以抽象的理解为一个对象（或者生产对象的方式） 
-
-就目前的js来说能开辟独立上下文的方式只有一种 function
-
-- 传说中最开始的刀耕火种用闭包各种全局变量组织结构
-- AMD UMD commonjs es6
-
-- [kmath](https://sharpgui.github.io/keditor/demos/kmath.editor.html)
-- [webpack analyse](http://webpack.github.io/analyse)
-
-## Code 对比
-
-### AMD
-```js
-define(['requrie','exports','module'],function(require, exports, module) {
-        var a = require('a'),
-            b = require('b');
-
-        exports.A=a
-    }）
-;
-```
-### angular
-```js
-angular.module('myApp', [])
-  .controller('Ctl', ['$scope', '$log', function ($scope, $log) {
-  $scope.name = 'leonwgc';
-  $log.log('hello,world');
-}]);
-```
-### webpack
-```js
 (function(modules) { // webpackBootstrap
     /******/ 	// The module cache
     /******/ 	var installedModules = {};
@@ -103,12 +56,3 @@ module.exports = math;
 /***/ })
         
     ]);
-```
-
-
-
-
-
-
-
-

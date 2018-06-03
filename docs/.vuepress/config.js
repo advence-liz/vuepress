@@ -9,15 +9,16 @@ module.exports = {
       }
     ]
   ],
+  title: 'Module',
   // dest:`.vuepress/dist`,
   base: vuepress_env ? `/blog/` : `/`,
   port: 8080,
   themeConfig: {
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Guide', link: '/guide/' },
-      { text: 'Code', link: '/code/' },
-      { text: 'External', link: 'https://google.com' }
+      { text: 'AMD', link: '/amd/' },
+      { text: 'Commonjs', link: '/commonjs/' },
+      { text: 'es6', link: '/es6/' }
     ]
   }
 }

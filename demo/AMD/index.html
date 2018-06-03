@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">-->
+    <script data-main="./index" src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js"></script>
+   
+    <!--<script src="http://cdn.bootcss.com/react/15.4.2/react.js"></script>
+    <script src="http://cdn.bootcss.com/react/15.4.2/react-dom.js"></script>-->
+    <!--<script src="http://cdn.bootcss.com/babel-standalone/6.23.1/babel.js"></script>-->
+ 
+    <title>React App Use requirjs</title>
+  </head>
+  <body>
+    <div id="root"></div>
+      <script>
+          require.config({
+        //  baseUrl: "../dist/js/", // the path where the kendo scripts are present
+          paths: {
+            "react": "../lib/react",
+            "react-dom": "../lib/react-dom"
+          }
+        });
+      </script>
+      <!--<script src="../dist/hello.js"></script>-->
+  </body>
+ 
+</html>
