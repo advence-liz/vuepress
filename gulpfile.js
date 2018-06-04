@@ -21,7 +21,7 @@ const AllModules = fs.readdirSync(path.join('src', 'components'))
 gulp.task('html', function() {
   return gulp
     .src([
-      path.join(CurrentModulePath, 'favicon.ico'),
+      path.join(__dirname, 'static', 'favicon.ico'),
       path.join(CurrentModulePath, '*.html')
     ])
     .pipe(gulp.dest('app'))
