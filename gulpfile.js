@@ -7,14 +7,23 @@ const path = require('path')
 const pkg = require('./package.json')
 const sourcemaps = require('gulp-sourcemaps')
 const fs = require('fs')
+const shell = require('shelljs')
 const argv = require('yargs').argv
-const root = path.join('src', 'components', pkg.module)
-const allModule = fs.readdirSync(path.join('src', 'components'))
 const chalk = require('chalk')
+/**
+ * @var {String} CurrentRootPath
+ */
+const CurrentRootPath = path.join('src', 'components')
+const CurrentModulePath = path.join('src', 'components', pkg.module)
+const CurrentModule = pkg.module
+const AllModules = fs.readdirSync(path.join('src', 'components'))
 
 gulp.task('html', function() {
   return gulp
-    .src([path.join(root, 'favicon.ico'), path.join(root, '*.html')])
+    .src([
+      path.join(CurrentModulePath, 'favicon.ico'),
+      path.join(CurrentModulePath, '*.html')
+    ])
     .pipe(gulp.dest('app'))
 })
 /**
@@ -22,7 +31,7 @@ gulp.task('html', function() {
  */
 gulp.task('js', function() {
   return gulp
-    .src(path.join(root, '*.js'))
+    .src(path.join(CurrentModulePath, '*.js'))
     .pipe(gulp.dest('app'))
     .pipe(reload({ stream: true }))
 })
@@ -34,7 +43,7 @@ gulp.task('js', function() {
 //         .pipe(gulp.dest(build))
 gulp.task('less', function() {
   return gulp
-    .src(path.join(root, 'index.less'))
+    .src(path.join(CurrentModulePath, 'index.less'))
     .pipe(sourcemaps.init())
     .pipe(less())
     .pipe(sourcemaps.write('./maps'))
@@ -50,14 +59,14 @@ gulp.task('start', ['less', 'js', 'html'], function() {
     }
   })
 
-  gulp.watch(path.join(root, '*.less'), ['less'])
-  gulp.watch(path.join(root, '*.js'), ['js'])
-  gulp.watch(path.join(root, '*.html'), ['html', reload])
+  gulp.watch(path.join(CurrentModulePath, '*.less'), ['less'])
+  gulp.watch(path.join(CurrentModulePath, '*.js'), ['js'])
+  gulp.watch(path.join(CurrentModulePath, '*.html'), ['html', reload])
 })
 
-gulp.task('build',function(){
-    return gulp
-    .src(path.join(__dirname,'src', 'index.less'))
+gulp.task('build', function() {
+  return gulp
+    .src(path.join(__dirname, 'src', 'index.less'))
     .pipe(sourcemaps.init())
     .pipe(less())
     .pipe(sourcemaps.write('./maps'))
@@ -70,34 +79,78 @@ const beautify = require('js-beautify').js_beautify
  * gulp checkout -b <name>
  */
 gulp.task('checkout', function() {
-  let currentModule = pkg.module
+  let currentModule = CurrentModule
   let nextModule = argv.b
-  if (allModule.indexOf(nextModule > -1)) {
-    pkg.module = nextModule
-    let packageText = beautify(JSON.stringify(pkg))
-    fs.writeFileSync(path.join(__dirname, 'package.json'), packageText)
-  }
-  if (nextModule) {
-    return gulp
-      .src(path.join(__dirname, 'src', currentModule, '**'))
-      .pipe(gulp.dest(path.join(__dirname, 'src', nextModule)))
-  }
+  switchModule(currentModule, nextModule)
 })
 /**
  * gulp branch -n
+ *  -n -b -d
  */
 gulp.task('branch', function() {
-  let currentModule = pkg.module
-  allModule.forEach(item => {
-    if (item === currentModule) {
+  // console.log(argv)
+  if (argv.b) {
+    switchModule(CurrentModule, argv.b)
+    return
+  } else if (argv.n) {
+    switchModule('demo', argv.n)
+    return
+  } else if (argv.d) {
+    deleteModule(argv.d)
+    return
+  }
+  printModule()
+})
+function printModule() {
+  AllModules.forEach(item => {
+    if (item === CurrentModule) {
       console.info(chalk.green(item))
     } else {
       console.info(item)
     }
   })
-
-  // console.log(...allModule)
-})
+}
+function switchModule(currentModule, nextModule) {
+  // console.log(currentModule, nextModule)
+  if (currentModule === nextModule) {
+    console.info(
+      chalk.red('The target module cannot be equal to the current module!')
+    )
+    return
+  }
+  if (AllModules.indexOf(nextModule) > -1) {
+    pkg.module = nextModule
+    let packageText = beautify(JSON.stringify(pkg))
+    fs.writeFileSync(path.join(__dirname, 'package.json'), packageText)
+    console.info(chalk.green('Successfully written to Package.json'))
+    return
+  }
+  if (nextModule) {
+    createModule(currentModule, nextModule)
+  }
+}
+function createModule(sourceModule, targetModule) {
+  if (sourceModule === targetModule) {
+    console.info(
+      chalk.red('The target module cannot be equal to the current module!')
+    )
+    return
+  }
+  return gulp
+    .src(path.join(CurrentRootPath, sourceModule, '**'))
+    .pipe(gulp.dest(path.join(CurrentRootPath, targetModule)))
+    .on('end', () => {
+      console.info(chalk.green(`create ${targetModule} from ${sourceModule}`))
+    })
+}
+function deleteModule(targetModule) {
+  if (targetModule === 'demo') {
+    console.info(chalk.red('The demo directory should not be removed!'))
+    return
+  }
+  shell.rm('-rf', path.join(CurrentRootPath, targetModule))
+  console.info(chalk.green(`${targetModule} successfully deleted`))
+}
 
 gulp.task('beautify', function() {
   gulp

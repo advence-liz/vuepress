@@ -1,42 +1,49 @@
 {
-  "name": "blog",
-  "version": "1.0.0",
-  "description": "verpress",
-  "module": "demo",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "vuepress dev docs",
-    "prestart": "npm run build",
-    "start": "node ./bin/server.js",
-    "build": "vuepress build docs",
-    "deploy": "node ./bin/deploy.js",
-    "log": "process.env.vuepress_env = 'github'&& console.log(process.env.vuepress_env)"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/advence-liz/blog.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/advence-liz/blog/issues"
-  },
-  "homepage": "https://github.com/advence-liz/blog#readme",
-  "dependencies": {
-    "browser-sync": "^2.24.4",
-    "chalk": "^2.4.1",
-    "gulp": "^3.9.1",
-    "gulp-less": "^3.5.0",
-    "gulp-sourcemaps": "^2.6.4",
-    "js-beautify": "^1.7.5",
-    "koa": "^2.5.1",
-    "koa-static": "^4.0.3",
-    "shelljs": "^0.8.2",
-    "vuepress": "^0.10.0",
-    "yargs": "^11.0.0"
-  },
-  "devDependencies": {
-    "gh-pages": "^1.1.0"
-  }
+    "name": "blog",
+    "version": "1.0.0",
+    "description": "verpress",
+    "module": "demo",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "dev": "vuepress dev docs",
+        "prestart": "npm run build",
+        "start": "node ./bin/server.js",
+        "build": "vuepress build docs",
+        "deploy": "node ./bin/deploy.js",
+        "log": "process.env.vuepress_env = 'github'&& console.log(process.env.vuepress_env)"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/advence-liz/blog.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/advence-liz/blog/issues"
+    },
+    "homepage": "https://github.com/advence-liz/blog#readme",
+    "dependencies": {
+        "koa": "^2.5.1",
+        "koa-static": "^4.0.3",
+        "shelljs": "^0.8.2",
+        "vuepress": "^0.10.0"
+    },
+    "devDependencies": {
+        "gh-pages": "^1.1.0",
+        "yargs": "^11.0.0",
+        "eslint": "^4.19.1",
+        "eslint-config-standard": "^11.0.0",
+        "eslint-plugin-import": "^2.12.0",
+        "eslint-plugin-node": "^6.0.1",
+        "eslint-plugin-promise": "^3.8.0",
+        "eslint-plugin-standard": "^3.1.0",
+        "browser-sync": "^2.24.4",
+        "babel-eslint": "^8.2.3",
+        "chalk": "^2.4.1",
+        "gulp": "^3.9.1",
+        "gulp-less": "^3.5.0",
+        "gulp-sourcemaps": "^2.6.4",
+        "js-beautify": "^1.7.5"
+    }
 }
