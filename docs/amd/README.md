@@ -113,6 +113,7 @@ define(['requrie','exports','module'],function(require, exports, module) {
     }
 );
 ```
+## r.js
 
 ## babel
 commonjs js 规范是 AMD 的子集 看一下demo

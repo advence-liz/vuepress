@@ -12,17 +12,15 @@ footer: MIT Licensed | Copyright © liz
 
 JavaScript 随着时间的推移所负责的责任越来越重从最开始的添加表单验证功能之类的脚本到angular 应用开发框架，随着js任务越来越重就急需模块化的解决方案。
 
-模块化的基础条件就是开辟一片独立的上下文，一般编程语言开辟一个上下文的方式有语法上可以通过 class  function  block ，物理上通过文件划分，逻辑划分 package namespace，
-多数语言要么通过 物理路径划分模块，要么根据逻辑路径抽象划分，而模块输出结果基本可以抽象的理解为一个对象（或者生产对象的方式） 
-
-就目前的js来说能开辟独立上下文的方式只有一种 function
+模块化的基础条件就是开辟一片独立的上下文,那些拥有模块化功能的语言或通过物理文件组织模块，或以抽象的 namespace package 组织模块，
+而JavaScript 并没这种能力只能从语法上开辟独立的上下文，就目前浏览器端运行的js来说能开辟独立上下文的方式只有一种方式 function
 
 - 传说中最开始的刀耕火种用闭包各种全局变量组织结构
 - AMD UMD commonjs es6
 
 - [kmath](https://sharpgui.github.io/keditor/demos/kmath.editor.html)
 - [webpack analyse](http://webpack.github.io/analyse)
-
+- 现在webpack 支持 AMD commonjs es6 ，因为webpack只是格式上的支持
 ## Code 对比
 
 ### AMD
