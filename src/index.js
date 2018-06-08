@@ -1,5 +1,5 @@
-const  React = require("react")
-const Angular = require("angular")
-const Vue = require("vue")
+import "./b"
 
-console.log(React)
+import a,{b} from './a'
+console.log(a)
+console.log(b)
