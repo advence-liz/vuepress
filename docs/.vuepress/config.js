@@ -11,7 +11,7 @@ module.exports = {
   ],
   // dest:`.vuepress/dist`,
   base: vuepress_env ? `/blog/` : `/`,
-  port: 8080,
+  port: 3002,
   themeConfig: {
     nav: [
       { text: 'Home', link: '/' },

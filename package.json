@@ -2,7 +2,7 @@
     "name": "blog",
     "version": "1.0.0",
     "description": "verpress",
-    "module": "demo",
+    "module": "type",
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
@@ -24,26 +24,30 @@
     },
     "homepage": "https://github.com/advence-liz/blog#readme",
     "dependencies": {
+        "autoprefixer": "^8.6.3",
+        "gulp-plumber": "^1.2.0",
+        "gulp-postcss": "^7.0.1",
+        "gulp.spritesmith": "^6.9.0",
         "koa": "^2.5.1",
         "koa-static": "^4.0.3",
         "shelljs": "^0.8.2",
         "vuepress": "^0.10.0"
     },
     "devDependencies": {
-        "gh-pages": "^1.1.0",
-        "yargs": "^11.0.0",
+        "babel-eslint": "^8.2.3",
+        "browser-sync": "^2.24.4",
+        "chalk": "^2.4.1",
         "eslint": "^4.19.1",
         "eslint-config-standard": "^11.0.0",
         "eslint-plugin-import": "^2.12.0",
         "eslint-plugin-node": "^6.0.1",
         "eslint-plugin-promise": "^3.8.0",
         "eslint-plugin-standard": "^3.1.0",
-        "browser-sync": "^2.24.4",
-        "babel-eslint": "^8.2.3",
-        "chalk": "^2.4.1",
+        "gh-pages": "^1.1.0",
         "gulp": "^3.9.1",
         "gulp-less": "^3.5.0",
         "gulp-sourcemaps": "^2.6.4",
-        "js-beautify": "^1.7.5"
+        "js-beautify": "^1.7.5",
+        "yargs": "^11.0.0"
     }
 }

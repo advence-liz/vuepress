@@ -9,7 +9,11 @@ const sourcemaps = require('gulp-sourcemaps')
 const fs = require('fs')
 const shell = require('shelljs')
 const argv = require('yargs').argv
+const plumber = require('gulp-plumber')
 const chalk = require('chalk')
+const spritesmith = require('gulp.spritesmith')
+const postcss = require('gulp-postcss')
+const autoprefixer = require('autoprefixer')
 /**
  * @var {String} CurrentRootPath
  */
@@ -42,10 +46,14 @@ gulp.task('js', function() {
 //         .pipe(sourcemaps.write('./maps'))
 //         .pipe(gulp.dest(build))
 gulp.task('less', function() {
+  // defaults: Browserslist’s default browsers (> 0.5%, last 2 versions, Firefox ESR, not dead).
+  let plugins = [autoprefixer({ browsers: ['last 2 version', '> 1%'] })]
   return gulp
     .src(path.join(CurrentModulePath, 'index.less'))
+    .pipe(plumber())
     .pipe(sourcemaps.init())
     .pipe(less())
+    .pipe(postcss(plugins))
     .pipe(sourcemaps.write('./maps'))
     .pipe(gulp.dest('app'))
     .pipe(reload({ stream: true }))
@@ -59,16 +67,18 @@ gulp.task('start', ['less', 'js', 'html'], function() {
     }
   })
 
-  gulp.watch(path.join(CurrentModulePath, '*.less'), ['less'])
+  gulp.watch(path.join(__dirname, 'src', '**', '*.less'), ['less'])
   gulp.watch(path.join(CurrentModulePath, '*.js'), ['js'])
   gulp.watch(path.join(CurrentModulePath, '*.html'), ['html', reload])
 })
 
 gulp.task('build', function() {
+  let plugins = [autoprefixer({ browsers: ['last 2 version', '> 1%'] })]
   return gulp
     .src(path.join(__dirname, 'src', 'index.less'))
     .pipe(sourcemaps.init())
     .pipe(less())
+    .pipe(postcss(plugins))
     .pipe(sourcemaps.write('./maps'))
     .pipe(gulp.dest('dist'))
 })
@@ -85,7 +95,9 @@ gulp.task('checkout', function() {
 })
 /**
  * gulp branch -n
- *  -n -b -d
+ *  -n <name> new
+ *  -b <name> switch
+ *  -d <name> delete
  */
 gulp.task('branch', function() {
   // console.log(argv)
@@ -158,4 +170,57 @@ gulp.task('beautify', function() {
     .pipe(beautify())
     .pipe(gulp.dest('./package.json'))
 })
-// gulp.task()
+/**
+ * 生成sprite图,
+ */
+
+gulp.task('sprite', function() {
+  gulp
+    .src('images/*.png')
+    .pipe(
+      spritesmith({
+        imgName: 'images/sprite.png', // 合并后大图的名称
+        cssName: 'css/sprite.css',
+        padding: 2, // 每个图片之间的间距，默认为0px
+        cssTemplate: data => {
+          // data为对象，保存合成前小图和合成打大图的信息包括小图在大图之中的信息
+          let arr, width, height, url
+          arr = []
+          width = data.spritesheet.px.width
+          height = data.spritesheet.px.height
+          url = data.spritesheet.image
+          // console.log(data)
+          data.sprites.forEach(function(sprite) {
+            arr.push(
+              '.icon-' +
+                sprite.name.replace(/@/, '') +
+                '{' +
+                "background: url('" +
+                url +
+                "') " +
+                'no-repeat ' +
+                sprite.px.offset_x +
+                ' ' +
+                sprite.px.offset_y +
+                ';' +
+                'background-size: ' +
+                width +
+                ' ' +
+                height +
+                ';' +
+                'width: ' +
+                sprite.px.width +
+                ';' +
+                'height: ' +
+                sprite.px.height +
+                ';' +
+                '}\n'
+            )
+          })
+          // return "@fs:108rem;\n"+arr.join("")
+          return arr.join('')
+        }
+      })
+    )
+    .pipe(gulp.dest('dest/'))
+})
