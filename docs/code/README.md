@@ -22,6 +22,7 @@ sidebar: auto
 <button type="button" class="btn btn-outline-light">Light</button>
 <button type="button" class="btn btn-outline-dark">Dark</button>
 ```
+统一的参数设置方式 q-option 由Common 提供的构造函数生成，在构造函数中我们可以设置一些配置的默认值，项目进行中可以通过修改一些默认配置
 ## 样式
  
 采用BEM（Block__Element--modify）

@@ -40,11 +40,6 @@ gulp.task('js', function() {
     .pipe(reload({ stream: true }))
 })
 
-// gulp.src(path.join('less','dust.less'))
-//         .pipe(sourcemaps.init())
-//         .pipe(less())
-//         .pipe(sourcemaps.write('./maps'))
-//         .pipe(gulp.dest(build))
 gulp.task('less', function() {
   // defaults: Browserslist’s default browsers (> 0.5%, last 2 versions, Firefox ESR, not dead).
   let plugins = [autoprefixer({ browsers: ['last 2 version', '> 1%'] })]

@@ -28,8 +28,22 @@ h6, .h6 { font-size: @font-size-h6; }
 p {
   margin: 0 0;
 }
+.fc-b,.font-color-b{
+  color: @brand-primary;
+}
+.fc-3,.font-color-3{
+  color: @font-color-3;
+}
 
-
+.fc-6,.font-color-6{
+  color: @font-color-6;
+}
+.fc-9,.font-color-9{
+  color: @font-color-9;
+}
+.fc-c,.font-color-c{
+  color: @font-color-c;
+}
 
 
 // Alignment
@@ -48,53 +62,3 @@ p {
 
 
 
-// // Lists
-// // -------------------------
-
-// // Unordered and Ordered lists
-// ul,
-// ol {
-//   margin-top: 0;
-//   margin-bottom: (@line-height-computed / 2);
-//   list-style:none;
-//   ul,
-//   ol {
-//     margin-bottom: 0;
-//   }
-// }
-
-
-// // Description Lists
-// dl {
-//   margin-top: 0; // Remove browser default
-//   margin-bottom: @line-height-computed;
-// }
-// dt,
-// dd {
-//     line-height: @line-height-base;
-//     display: inline;
-// }
-// dt {
-//   font-weight: bold;
-//   &::after{
-//       content:":"
-//   }
-// }
-// dd {
-//   margin-left: 0; // Undo browser default
-// }
-
-// dd + dt::before {
-//     content: '\A';
-//     white-space: pre;
-// }
-
-// dd + dd::before {
-//     content: ', ';
-//     font-weight: normal;
-// }
-// dd + dd::before {
-//     content: ', ';
-//     margin-left: -.25em;
-//     font-weight: normal;
-// }

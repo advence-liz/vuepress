@@ -5,7 +5,7 @@
 - 3002 vuepress hot
 - 3003 vuepress koa-static
 # TODO
-[ ] 从大厂子抄袭几个实用的mixin
+[ ] copy几个实用的mixin
 [ ] gulp 升级为4.0.0
 [ ] postcss
 [ ] 优化自动生产结构的命令
