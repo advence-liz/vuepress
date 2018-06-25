@@ -2,7 +2,7 @@
 --------
 
 - **less**
-  + scoffolding // 脚手架 主要的全局设定 html，body，a
+  + scoffolding // 脚手架 主要的全局设定 html，body，a ,image
   + type //文字排版相关 其中包含 h1~h6,p,ul,li,dl,dd
   + grid //栅格系统跟bootstrap 完全一致
   + utilities //工具类 清除浮动显隐控制
