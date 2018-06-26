@@ -9,25 +9,16 @@ const pkg = require('../../package.json')
 const beautify = require('js-beautify').js_beautify
 
 const CurrentRootPath = path.join('src', 'components')
-
 const CurrentModule = pkg.module
 const AllModules = fs.readdirSync(path.join('src', 'components'))
 
 /**
- * gulp checkout -b <name>
- */
-gulp.task('checkout', function() {
-  let currentModule = CurrentModule
-  let nextModule = argv.b
-  switchModule(currentModule, nextModule)
-})
-/**
- * gulp branch -n
+ * gulp q -n
  *  -n <name> new
- *  -b <name> switch
+ *  -b <name> switch 如果name 不存在 则新建
  *  -d <name> delete
  */
-gulp.task('branch', function() {
+gulp.task('q', function() {
   // console.log(argv)
   if (argv.b) {
     switchModule(CurrentModule, argv.b)
@@ -63,7 +54,6 @@ function switchModule(currentModule, nextModule) {
     let packageText = beautify(JSON.stringify(pkg))
     fs.writeFileSync(path.join('package.json'), packageText)
     console.info(chalk.green('Successfully written to Package.json'))
-    gulp.start('refresh')
     return
   }
   if (nextModule) {
@@ -82,7 +72,6 @@ function createModule(sourceModule, targetModule) {
     .pipe(gulp.dest(path.join(CurrentRootPath, targetModule)))
     .on('end', () => {
       console.info(chalk.green(`create ${targetModule} from ${sourceModule}`))
-      gulp.start('refresh')
     })
 }
 function deleteModule(targetModule) {

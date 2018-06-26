@@ -7,6 +7,7 @@ const plumber = require('gulp-plumber')
 const lessChannel = require('./lessChannel')
 const handleErrors = require('../util/handleErrors')
 const template = require('gulp-template')
+// const shell = require('shelljs')
 // const chalk = require('chalk')
 
 const CurrentModulePath = path.join('src', 'components', pkg.module)
@@ -19,9 +20,9 @@ gulp.task('html', function() {
     .src([path.join(CurrentModulePath, '*.html')])
     .pipe(template({ name: pkg.module }))
     .pipe(gulp.dest('app'))
-    // .on('end', () => {
-    //   browserSync.reload()
-    // })
+  // .on('end', () => {
+  //   browserSync.reload()
+  // })
 })
 /**
  * 如果有必要可以可以扩展js 预编译
@@ -41,7 +42,6 @@ gulp.task('less', function() {
     .pipe(gulp.dest('app'))
     .pipe(reload({ stream: true }))
 })
-gulp.task('refresh', ['less', 'js', 'html'], reload)
 
 // 监视 less 文件的改动，如果发生变更，运行 'less' 任务，并且重载文件
 gulp.task('start', ['less', 'js', 'html'], function() {
@@ -53,5 +53,7 @@ gulp.task('start', ['less', 'js', 'html'], function() {
 
   gulp.watch(path.join('src', '**', '*.less'), ['less'])
   gulp.watch(path.join(CurrentModulePath, '*.js'), ['js'])
-  gulp.watch(path.join(CurrentModulePath, '*.html'), ['html'], reload)
+  gulp
+    .watch(path.join(CurrentModulePath, '*.html'), ['html'])
+    .on('change', reload)
 })

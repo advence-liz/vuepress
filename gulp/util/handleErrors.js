@@ -1,5 +1,12 @@
 const notify = require('gulp-notify')
-
+/**
+ * 错误处理
+ * @description
+ *  return gulp
+ *         .src(src)
+ *         .on('error', handleErrors)
+ *         .pipe(gulp.dest(dest))
+ */
 module.exports = function(...args) {
 //   var args = Array.prototype.slice.call(arguments)
 
