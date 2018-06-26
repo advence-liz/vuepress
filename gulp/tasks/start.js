@@ -48,7 +48,8 @@ gulp.task('start', ['less', 'js', 'html'], function() {
   browserSync({
     server: {
       baseDir: 'app'
-    }
+    },
+    open: false
   })
 
   gulp.watch(path.join('src', '**', '*.less'), ['less'])
