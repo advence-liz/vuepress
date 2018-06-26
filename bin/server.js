@@ -5,9 +5,9 @@ const chalk = require('chalk')
 const app = new Koa()
 
 // 静态资源目录对于相对入口文件index.js的路径
-const staticPath = path.join('..', 'docs', '.vuepress', 'dist')
-
-app.use(koaStatic(path.join(__dirname, staticPath)))
+const staticPath = path.join('docs', '.vuepress', 'dist')
+// console.log(process.cwd())
+app.use(koaStatic(path.join(staticPath)))
 
 // app.use( async ( ctx ) => {
 //   ctx.body = 'hello world'

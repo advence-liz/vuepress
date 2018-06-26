@@ -19,8 +19,8 @@ template.defaults.root = '.'
 gulp.task('icon', done => {
   let rootPath = path.join('.')
   let fileNames = glob.sync(path.join(rootPath, 'images/*.png'))
-  console.log(process.cwd())
-  console.log(template.defaults.root)
+  // console.log(process.cwd())
+  // console.log(template.defaults.root)
   let iconNames = fileNames.map(filePath => {
     let fileName = path.parse(filePath).name
     let className = `q-${fileName.replace(/@/, '').replace(/_/, '-')}`

@@ -4,9 +4,14 @@ const fs = require('fs')
 const glob = require('glob')
 const rename = require('gulp-rename')
 const base64 = require('gulp-base64')
-
+const handleErrors = require('../util/handleErrors')
+const config = require('../config')
+let { imagesSoucePath, lessName, src, dest, options } = config.base64
+/**
+ * 读取根目录下的images folder 根据*.png文件生成base64.less
+ */
 gulp.task('pre:base64', done => {
-  let fileNames = glob.sync('images/*.png')
+  let fileNames = glob.sync(imagesSoucePath)
   let iconNames = fileNames.map(filePath => {
     let fileName = path.parse(filePath).name
     let className = `q-${fileName.replace(/@/, '').replace(/_/, '-')}`
@@ -16,21 +21,14 @@ gulp.task('pre:base64', done => {
     }");}`
   })
   let value = iconNames.join('\n')
-  // let html = template(path.join(__dirname, 'template', 'icon.ejs'), { value })
-  fs.writeFileSync(path.join('src', 'images', 'base64.less'), value)
+  fs.writeFileSync(src, value)
   done()
 })
 gulp.task('base64', ['pre:base64'], () => {
   return gulp
-    .src('src/images/base64.less')
-    .pipe(
-      base64({
-        baseDir: 'images',
-        extensions: ['png'],
-        maxImageSize: 20 * 1024, // bytes
-        debug: true
-      })
-    )
-    .pipe(rename('index.less'))
-    .pipe(gulp.dest('src/images/'))
+    .src(src)
+    .pipe(base64(options))
+    .on('error', handleErrors)
+    .pipe(rename(lessName))
+    .pipe(gulp.dest(dest))
 })

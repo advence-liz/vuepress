@@ -5,7 +5,7 @@ const fs = require('fs')
 const argv = require('yargs').argv
 const chalk = require('chalk')
 const shell = require('shelljs')
-const pkg = require('../package.json')
+const pkg = require('../../package.json')
 const beautify = require('js-beautify').js_beautify
 
 const CurrentRootPath = path.join('src', 'components')
@@ -61,8 +61,9 @@ function switchModule(currentModule, nextModule) {
   if (AllModules.indexOf(nextModule) > -1) {
     pkg.module = nextModule
     let packageText = beautify(JSON.stringify(pkg))
-    fs.writeFileSync(path.join(__dirname, 'package.json'), packageText)
+    fs.writeFileSync(path.join('package.json'), packageText)
     console.info(chalk.green('Successfully written to Package.json'))
+    gulp.start('refresh')
     return
   }
   if (nextModule) {
@@ -81,6 +82,7 @@ function createModule(sourceModule, targetModule) {
     .pipe(gulp.dest(path.join(CurrentRootPath, targetModule)))
     .on('end', () => {
       console.info(chalk.green(`create ${targetModule} from ${sourceModule}`))
+      gulp.start('refresh')
     })
 }
 function deleteModule(targetModule) {
