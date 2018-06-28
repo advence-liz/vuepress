@@ -7,7 +7,10 @@ module.exports = {
         rel: 'stylesheet',
         href: `https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.css`
       }
-    ]
+    ],
+    ['srcipt', { src: 'https://cdn.bootcss.com/react/15.6.2/react.js' }],
+    ['srcipt', { src: 'https://cdn.bootcss.com/react/15.6.1/react-dom.js' }]
+    // ['srcipt', { src: 'button.js' }]
   ],
   // dest:`.vuepress/dist`,
   base: vuepress_env ? `/blog/` : `/`,
